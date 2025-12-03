@@ -10,13 +10,18 @@
     ansible.builtin.dnf:
       name: mongodb-org
       state: present
-  - name: Start service 
+  - name: Start and enable mongodb  
     ansible.builtin.service:
       name: mongod
       state: started
       enabled: yes
-  - name: Replace old hostname with new hostname (requires Ansible >= 2.4)
+  - name: allow romote connections
     ansible.builtin.replace:
     path: /etc/mongod.conf
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
+
+  - name: Start and enable mongodb  
+    ansible.builtin.service:
+      name: mongod
+      state: restarted
