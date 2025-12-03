@@ -10,11 +10,13 @@
     ansible.builtin.dnf:
       name: mongodb-org
       state: present
+      
   - name: Start and enable mongodb  
     ansible.builtin.service:
       name: mongod
       state: started
       enabled: yes
+
   - name: allow romote connections
     ansible.builtin.replace:
     path: /etc/mongod.conf
